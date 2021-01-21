@@ -8,27 +8,35 @@
 // numbers[0]+...+numbers[n] <= max
 int get_pos(const std::vector<unsigned>& numbers, int max)
 {
-   
- 
+
+
     unsigned int sum = 0;
-    unsigned int maxSize = numbers.size();
+    unsigned int Size = numbers.size() - 1 ;
     int pos = 0;
 
-    while ( (pos < maxSize) && ((sum + numbers[pos]) < max))
+
+    int next=0;
+
+
+    while ((pos <= Size) && ((sum + numbers[pos]) <= max) )
     {
        sum = sum + numbers[pos];
-        ++pos;
+       ++next;  // index of next elem
+       if (( (next <= Size) && (sum + numbers[next]) <= max))  { ++pos; }
+      
+         
+          
     }
 
 
   
-    return pos;
+    return pos ;
 }
 
 int main()
 {
     const std::vector<unsigned int> vec{ 3,3,2 };
-    int max = 1;
+    int max =10;
     int result = 0;
     result = get_pos(vec, max);
 
@@ -36,5 +44,8 @@ int main()
 
     assert(get_pos({3,3,2}, 6) == 1);
     assert(get_pos({ 3,3,2 }, 1) == 0);
-    assert(get_pos({ 3,3,2 }, 10) == 3);
+    assert(get_pos({ 3,3,2 }, 3) == 0);
+    assert(get_pos({ 3,3,2 }, 4) == 0);
+    assert(get_pos({ 3,3,2 }, 8) == 2);
+    assert(get_pos({ 3,3,2 }, 10) == 2);
 }
