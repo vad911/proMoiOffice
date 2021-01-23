@@ -17,6 +17,12 @@ int get_pos(const std::vector<unsigned>& numbers, int max)
 
     int next=0;
 
+    // выкинем -1, если самый перв
+    if (numbers[0] > max) 
+    {
+        return -1;
+    }
+
 
     while ((pos <= Size) && ((sum + numbers[pos]) <= max) )
     {
