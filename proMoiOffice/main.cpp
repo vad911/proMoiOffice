@@ -9,34 +9,43 @@
 int get_pos(const std::vector<unsigned>& numbers, int max)
 {
 
-
-    unsigned int sum = 0;
-    unsigned int Size = numbers.size() - 1 ;
     int pos = 0;
+    unsigned int sum = numbers[pos];
+    unsigned int Size = numbers.size()-1;
+ 
+  
 
 
-    int next=0;
+    int next= pos +1;
 
-    // выкинем -1, если самый перв
+    // выкинем -1, если самый первый элемент уже больше max
     if (numbers[0] > max) 
     {
         return -1;
     }
 
+    
 
-    while ((pos <= Size) && ((sum + numbers[pos]) <= max) )
+    while (next <= Size)
     {
-       sum = sum + numbers[pos];
-       ++next;  // index of next elem
-       if (( (next <= Size) && (sum + numbers[next]) <= max))  { ++pos; }
-      
-         
-          
+       
+       
+
+        if ((sum + numbers[next]) <= max)
+        {
+               sum = sum + numbers[next];
+               ++next;  // index of next elem
+               ++pos;
+        }
+        else 
+        {
+            return pos;
+        }
+     
+       
     }
-
-
   
-    return pos ;
+    return pos;
 }
 
 int main()
@@ -46,12 +55,14 @@ int main()
     int result = 0;
     result = get_pos(vec, max);
 
-    std::cout << "result =" << result;
-
+    std::cout << "\nresult =" << result;
+    
+    assert(get_pos({ 3,3,2 }, 1) == -1);
     assert(get_pos({3,3,2}, 6) == 1);
-    assert(get_pos({ 3,3,2 }, 1) == 0);
+    assert(get_pos({ 3,3,2 }, 1) == -1);
     assert(get_pos({ 3,3,2 }, 3) == 0);
     assert(get_pos({ 3,3,2 }, 4) == 0);
     assert(get_pos({ 3,3,2 }, 8) == 2);
     assert(get_pos({ 3,3,2 }, 10) == 2);
+    
 }
