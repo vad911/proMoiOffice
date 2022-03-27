@@ -13,7 +13,8 @@ int get_pos(const std::vector<unsigned>& numbers, int max)
     unsigned int sum = numbers[pos];
     unsigned int Size = numbers.size()-1;
  
-  
+    // here im on this branch master
+    // var_master = "branch_master"
 
 
     int next= pos +1;
